@@ -1,0 +1,52 @@
+﻿@model List<ProductViewModel>
+
+<div>
+    <div class="float-start">  <h2>Ürünler</h2>  </div>
+    <div class="float-end"> <a asp-area="Admin" asp-controller="Product" asp-action="New" class="btn btn-dark"> Yeni Ürün </a> </div>
+
+</div>
+
+
+<div style="padding-top:75px">
+
+
+    <table class="table table-striped">
+
+        <tr>
+            <th></th>
+            <th>Ürün Adı</th>
+            <th>Stok Miktarı</th>
+            <th></th>
+        </tr>
+
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>
+                    @if (string.IsNullOrWhiteSpace(@p.ImagePath))
+                    {
+                        <img src="~/Images/NoImage.jpg" width="120" height="120" />
+                    }
+                    else
+                    {
+                        <img src="~/Images/Products/@p.ImagePath" width="120" height="120" />
+                    }
+
+                </td>
+
+                <td>@p.Name</td>
+                <td>@p.UnitInStock</td>
+                <td>
+
+                    <a asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-dark">Düzenle</a>
+                    <a asp-area="Admin" asp-controller="Product" asp-action="Delete" asp-route-id="@p.Id" class="btn btn-sm btn-dark">Sil</a>
+
+                </td>
+            </tr>
+        }
+
+
+    </table>
+
+
+</div>
